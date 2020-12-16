@@ -20,8 +20,6 @@ Check your configs
 - docker-solr.conf
 - docker-elasticsearch.conf
 
-Make sure your spacy model in the docker install matches the same model that you use in the pipeline configuration below!)
-
 Then build and run the container (will take a little while):
 
 #### Solr
@@ -45,7 +43,7 @@ When running, you can then access the Admin UI and API docs at http://localhost:
 
 ### Manual Installation
 
-Install the dependencies (make sure you download the same model that you use in the pipeline configuration below!)
+Install the dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -55,10 +53,23 @@ python -m nltk.downloader wordnet
 
 Check your configs
 - config.json
-- solr.conf
-- elasticsearch.conf
+- docker-solr.conf
+- docker-elasticsearch.conf
 
 Then start either ```./run-solr.sh``` or ```./run-elastic.sh```
+
+### Next steps: Elasticsearch
+
+At this point you should be able to load the hello-nlp UI in a browser. Navigate to the Search menu at the top.
+
+1. Download elasticsearch and start it up in the background mode:
+
+```bash
+bin/elasticsearch -d
+```   
+
+1. You will likely need to enable CORS in the elasticsearch configuration, if you see an error related to it.
+2. Create an index `osc-blog`
 
 ## Graph API
 
@@ -123,6 +134,8 @@ q=shirt
 ```
 
 ### Elasticsearch Support
+
+_coming soon_
 
 Just like a regular Elastic QueryDSL request, pass the query json as a body to ```POST /elastic/{index_name}```
 
